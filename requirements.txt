@@ -2,3 +2,5 @@ fastapi
 pytest
 requests
 uvicorn[standard]
+cherrypy
+fitbit
