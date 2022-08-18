@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from fitbit import Fitbit
 
 from app.routers import items
+from app.config import REDIRECT_URI
 
 app = FastAPI()
 
@@ -27,7 +28,7 @@ def read_root():
 
 @app.post("/api/fitbit/login")
 def login_fitbit(fitbit_id: FitbitID):
-    server = OAuth2Server(fitbit_id.client_id, fitbit_id.client_secret)
+    server = OAuth2Server(fitbit_id.client_id, fitbit_id.client_secret, REDIRECT_URI)
     server.browser_authorize()
     return server.fitbit.client.session.token.items()
 
